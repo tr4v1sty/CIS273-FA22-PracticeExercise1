@@ -36,7 +36,24 @@ namespace PracticeExercise1
         /// <summary>
         /// Returns last element in list, null if empty.
         /// </summary>
-        public int? Last { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int? Last {
+
+            //get
+            //{
+            //    if (IsEmpty)
+            //    {
+            //        return null;
+            //    }
+            //    else
+            //    {
+            //        return array[array.Length - 1];
+            //    }
+            //}
+
+            get => IsEmpty ? null : array.Last(); }
+
+
+        
 
         /// <summary>
         /// Returns true if list is has no elements; false otherwise.
@@ -57,6 +74,7 @@ namespace PracticeExercise1
         {
             if(Length == array.Length)
             {
+               
                 Resize();
             }
 
@@ -90,7 +108,11 @@ namespace PracticeExercise1
         /// <returns>Index of first element with value; -1 if element is not found</returns>
         public int FirstIndexOf(int value)
         {
-            throw new NotImplementedException();
+            // find function learned from w3 schools
+            var result = Array.Find(array, element => element == value);
+            // != value used to indicate if not value return -1 else return result
+            return result != value ? -1 : result;
+
         }
 
         // TODO
@@ -159,7 +181,10 @@ namespace PracticeExercise1
         /// <param name="value">value of item to be removed</param>
         public void Remove(int value)
         {
-            throw new NotImplementedException();
+            // this sets the value to remove
+            int valRemove = value;
+            array = array.Where(val => val != valRemove).ToArray();
+            return;
         }
 
         // TODO
@@ -210,9 +235,9 @@ namespace PracticeExercise1
         /// <summary>
         /// Remove all elements from list
         /// </summary>
-        public void Clear()
+        public static void Clear(Array array, int index, int length)
         {
-            length = 0;
+            Array.Clear(array, index, length);
         }
 
         /// <summary>
@@ -237,6 +262,10 @@ namespace PracticeExercise1
             Array.Resize(ref array, 2 * array.Length);
         }
 
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
