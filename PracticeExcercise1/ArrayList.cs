@@ -229,9 +229,14 @@ namespace PracticeExercise1
         /// <param name="index"></param>
         public void RemoveAt(int index)
         {
-            ShiftLeft(index);
-            
-            length--;
+            if ((index >= 0) && (index < length))
+            {
+                for (int i = index; i < length - 1; i++)
+                {
+                    array[i] = array[i + 1];
+                }
+                length--;
+            }
         }
 
         public override string ToString()
