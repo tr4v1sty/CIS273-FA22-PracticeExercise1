@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
+
 namespace PracticeExercise1
 {
 	public class ArrayList : IList
@@ -110,10 +113,14 @@ namespace PracticeExercise1
         /// <returns>Index of first element with value; -1 if element is not found</returns>
         public int FirstIndexOf(int value)
         {
-            // find function learned from w3 schools
-            var result = Array.Find(array, element => element == value);
-            // != value used to indicate if not value return -1 else return result
-            return result != value ? -1 : result;
+            for (int i = 0; i < Length; i++)
+            {
+                if (array[i] == value)
+                {
+                    return i;
+                }
+            }
+            return -1;
 
         }
 
@@ -126,7 +133,16 @@ namespace PracticeExercise1
         /// <param name="existingValue"></param>
         public void InsertAfter(int newValue, int existingValue)
         {
-            throw new NotImplementedException();
+            if ((length + 1 <= array.Length) && (existingValue < Length) && (existingValue >= 0))
+            {
+                length++;
+
+                for (int i = length - 1; i > existingValue; i--)
+                {
+                    array[i] = array[i - 1];
+                }
+                array[existingValue] = newValue;
+            }
         }
 
         // TODO
@@ -202,6 +218,7 @@ namespace PracticeExercise1
             int numIndex = FirstIndexOf(value);
             array = array.Where((val, idx) => idx != numIndex).ToArray();
             RemoveAt(0);
+            length--;
             
         }
 
@@ -213,6 +230,7 @@ namespace PracticeExercise1
         public void RemoveAt(int index)
         {
             ShiftLeft(index);
+            
             length--;
         }
 
@@ -253,9 +271,10 @@ namespace PracticeExercise1
         /// <summary>
         /// Remove all elements from list
         /// </summary>
-        public static void Clear(Array array, int index, int length)
+        public void Clear()
         {
-            Array.Clear(array, index, length);
+            length = 0;
+
         }
 
         /// <summary>
@@ -280,10 +299,7 @@ namespace PracticeExercise1
             Array.Resize(ref array, 2 * array.Length);
         }
 
-        public void Clear()
-        {
-            Array.Clear(array, array.Length, 0);
-        }
+        
     }
 }
 
