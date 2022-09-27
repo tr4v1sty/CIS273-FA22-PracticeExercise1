@@ -50,7 +50,7 @@ namespace PracticeExercise1
             //    }
             //}
 
-            get => IsEmpty ? null : array.Last(); }
+            get => IsEmpty ? null : array[array.Last()]; }
 
 
         
@@ -182,9 +182,10 @@ namespace PracticeExercise1
         public void Remove(int value)
         {
             // this sets the value to remove
-            int valRemove = value;
-            array = array.Where(val => val != valRemove).ToArray();
-            return;
+            int numToRemove = value;
+            int numIndex = Array.IndexOf(array, numToRemove);
+            array = array.Where((val, idx) => idx != numIndex).ToArray();
+            
         }
 
         // TODO
@@ -264,7 +265,7 @@ namespace PracticeExercise1
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            Array.Clear(array, 0, array.Length);
         }
     }
 }

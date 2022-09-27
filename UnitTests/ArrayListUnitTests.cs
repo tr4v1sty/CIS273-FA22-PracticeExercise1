@@ -244,10 +244,10 @@ namespace UnitTests
             {
                 list.Append(i);
             }
-            // changed list index to 15 because idk if it was meant to match or not since it would be -1 otherwise
+            // changed list index to 15 from 10 because idk if it was meant to match or not since it would be -1 otherwise
             Assert.AreEqual(0, list.FirstIndexOf(0));
             Assert.AreEqual(4, list.FirstIndexOf(4));
-            Assert.AreEqual(15, list.FirstIndexOf(15));
+            Assert.AreEqual(15, list.FirstIndexOf(10));
         }
 
         [TestMethod]
