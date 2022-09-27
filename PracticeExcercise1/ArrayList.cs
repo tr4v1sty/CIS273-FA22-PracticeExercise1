@@ -36,7 +36,8 @@ namespace PracticeExercise1
         /// <summary>
         /// Returns last element in list, null if empty.
         /// </summary>
-        public int? Last {
+        public int? Last 
+        {
 
             //get
             //{
@@ -50,7 +51,8 @@ namespace PracticeExercise1
             //    }
             //}
 
-            get => IsEmpty ? null : array[array.Last()]; }
+            get => IsEmpty ? null : array[Length - 1]; 
+        }
 
 
         
@@ -77,8 +79,8 @@ namespace PracticeExercise1
                
                 Resize();
             }
-
-            array[length] = value;
+            
+            array[Length] = value;
             length++;
         }
 
@@ -135,7 +137,21 @@ namespace PracticeExercise1
         /// <param name="index"></param>
         public void InsertAt(int value, int index)
         {
-            throw new NotImplementedException();
+            // check if array list full and resize as needed
+
+            // 0.5  check range
+
+            //  1 - shift right starting at index
+
+            // 2 - write new value at index
+            array[index] = value;
+            // 3 - increment length
+            length++;
+            if (Length == array.Length)
+            {
+
+                Resize();
+            }
         }
 
         /// <summary>
@@ -182,9 +198,10 @@ namespace PracticeExercise1
         public void Remove(int value)
         {
             // this sets the value to remove
-            int numToRemove = value;
-            int numIndex = Array.IndexOf(array, numToRemove);
+            
+            int numIndex = FirstIndexOf(value);
             array = array.Where((val, idx) => idx != numIndex).ToArray();
+            RemoveAt(0);
             
         }
 
@@ -265,7 +282,7 @@ namespace PracticeExercise1
 
         public void Clear()
         {
-            Array.Clear(array, 0, array.Length);
+            Array.Clear(array, array.Length, 0);
         }
     }
 }
