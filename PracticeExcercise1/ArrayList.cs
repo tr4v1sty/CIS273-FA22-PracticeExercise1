@@ -142,7 +142,7 @@ namespace PracticeExercise1
             // 0.5  check range
 
             //  1 - shift right starting at index
-
+            ShiftRight(index);
             // 2 - write new value at index
             array[index] = value;
             // 3 - increment length
