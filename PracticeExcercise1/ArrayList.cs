@@ -133,16 +133,23 @@ namespace PracticeExercise1
         /// <param name="existingValue"></param>
         public void InsertAfter(int newValue, int existingValue)
         {
-            if ((length + 1 <= array.Length) && (existingValue < Length) && (existingValue >= 0))
+            if (Contains(existingValue) == false)
             {
-                length++;
+                Append(newValue);
 
-                for (int i = length - 1; i > existingValue; i--)
-                {
-                    array[i] = array[i - 1];
-                }
-                array[existingValue] = newValue;
             }
+            else 
+            {
+                InsertAt(newValue, FirstIndexOf(existingValue ) + 1) ;
+
+            }
+
+            if (Length == array.Length)
+            {
+
+                Resize();
+            }
+            
         }
 
         // TODO
@@ -213,13 +220,14 @@ namespace PracticeExercise1
         /// <param name="value">value of item to be removed</param>
         public void Remove(int value)
         {
-            // this sets the value to remove
+
+            int val = FirstIndexOf(value);
+            if (val != -1)
+            {
+                RemoveAt(val);
+            }
             
-            int numIndex = FirstIndexOf(value);
-            array = array.Where((val, idx) => idx != numIndex).ToArray();
-            RemoveAt(0);
-            length--;
-            
+
         }
 
         // TODO
@@ -229,18 +237,23 @@ namespace PracticeExercise1
         /// <param name="index"></param>
         public void RemoveAt(int index)
         {
-            if ((index >= 0) && (index < length))
+            if ((index >= 0) && (index < Length))
             {
-                for (int i = index; i < length - 1; i++)
+                for (int i = index; i < Length - 1; i++)
                 {
                     array[i] = array[i + 1];
                 }
                 length--;
             }
+            else throw new IndexOutOfRangeException();
         }
 
         public override string ToString()
         {
+            if (this.IsEmpty)
+            {
+                return "[]";
+            }
             string str = "[ ";
 
             for(int i=0; i < Length-1; i++)
